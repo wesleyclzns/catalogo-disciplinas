@@ -1,25 +1,25 @@
-import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Vue from "vue";
+import VueRouter from "vue-router";
+import PaginaInicial from "@/views/PaginaInicial.vue"; // Importe o componente da página inicial
+import PaginaDisciplina from "@/views/PaginaDisciplina.vue"; // Importe o componente da página de disciplina
+
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: PaginaInicial,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/disciplina/:sigla", // Defina um parâmetro :sigla na rota
+    name: "disciplina",
+    component: PaginaDisciplina,
+    props: true, // Permite passar a SIGLA como prop para o componente
   },
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
   routes,
 });
 
